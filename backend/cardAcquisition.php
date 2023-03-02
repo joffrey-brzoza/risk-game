@@ -46,8 +46,8 @@ $postdata = json_encode($data);
 
 curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 //for debug only!
-curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+//curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+//curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($curl, CURLOPT_POSTFIELDS, $postdata);
 
 $resp = curl_exec($curl);
@@ -55,4 +55,3 @@ curl_close($curl);
 
 header("Content-Type: application/json");
 print($resp);
-?>

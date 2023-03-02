@@ -1,3 +1,32 @@
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+let lang = urlParams.get('lang') || "EN";
+lang = lang?.toUpperCase();
+const availableLang = ['EN','JP'];
+lang = availableLang.includes(lang) ? lang : "EN";
+
+console.log("LANG:", lang);
+
+const translation = [
+    { id:"amount", "EN":"Amount", "JP":"購入額"},
+    { id:"currency", "EN":"Currency", "JP":"結果"},
+    { id:"shopper_location", "EN":"Shopper location", "JP":"ショッパーの場所"},
+    { id:"delivery_location", "EN":"Delivery location ", "JP":"配送場所"},
+    { id:"account_age", "EN":"Account age", "JP":"利用年数"},
+    { id:"transaction_declined", "EN":"Transaction declined", "JP":"決済拒否"},
+    { id:"transaction_authorized", "EN":"Transaction authorized", "JP":"決済承認"},
+    { id:"risk_rule_triggered", "EN":"Risk rule triggered", "JP":"リスクあり"},
+    { id:"risk_rule_not_triggered", "EN":"Risk rule not triggered", "JP":"リスクなし"},
+    { id:"logout", "EN":"Logout", "JP":"ログアウト"},
+    { id:"welcome_start", "EN":"Welcome", "JP":"ようこそ、"},
+    { id:"welcome_end", "EN":"", "JP":"さん"},
+];
+
+const getTranslation = (text) => {
+    const item = translation.find(itm => itm.id === text);
+    return item[lang];
+}
+
 let transaction = {}
 
 const amountList = [500, 1000, 5000, 8000, 10000, 15000, 50000, 150000];
@@ -118,11 +147,11 @@ const displayResult = (data) => {
 
     // Display transaction status
     if (resultscore >= 100) {
-        document.getElementById("approvedDeclined").innerHTML = "Transaction declined";
+        document.getElementById("approvedDeclined").innerHTML = getTranslation("transaction_declined", lang);
         document.getElementById("approvedDeclined").style.backgroundColor = "rgba(255,0,0,0.95)";
     }
     else {
-        document.getElementById("approvedDeclined").innerHTML = "Transaction approved";
+        document.getElementById("approvedDeclined").innerHTML = getTranslation("transaction_authorized", lang);
         document.getElementById("approvedDeclined").style.backgroundColor = "#0ABF53";
     }
     
@@ -130,11 +159,11 @@ const displayResult = (data) => {
     const customRulesCheckList = data.fraudResult.results
 
     for (let item of resultRulesList) {
-        document.getElementById(item).innerHTML = "No risk";
+        document.getElementById(item).innerHTML = getTranslation("risk_rule_not_triggered", lang);
     }
 
     for (let item of customRulesCheckList) {
-        document.getElementById(item.name).innerHTML = "Risk triggered [+" + item.accountScore + "]";
+        document.getElementById(item.name).innerHTML = getTranslation("risk_rule_triggered", lang) + "[+" + item.accountScore + "]";
         document.getElementById(item.name).style.color = "red";
     }
 }

@@ -28,78 +28,47 @@ function receive(event) {
     initGame(data);
 }
 
+const initTranslation = () => {
+    translation.forEach(item => {
+      if (document.getElementById("result_" + item.id)) {
+        document.getElementById("result_" + item.id).innerHTML = item[lang];
+      }
+    })
+}
+
 window.addEventListener('message', receive);
 </script>
 
 </head>
 
-<body>
+<body onload=initTranslation()>
 
 <div class="resultsParent">
 
     <div class="upperResult"><div class="approved" id="approvedDeclined">-</div><div class="finalrisk" id="finalrisk"></div></div>
     <div class="midResult"></div>
     <div class="lowerResult">
-        
-    <div class="oneResult"><div>Amount</div><img src="img/amount.png" width="40"></div>
+        <div class="oneResult"><div id="result_amount"></div><img src="img/amount.png" width="40"></div>
         <div class="rawdata" id="rawdata_amount"></div>
         <div class="textResult norisk" id="CustomFieldCheck-AmountCheck">-</div>
-    
-        <div class="oneResult"><div>Currency</div><img src="img/ccy_jpy.png" class="categoryIcon"></div>
+        
+        <div class="oneResult"><div id="result_currency"></div><img src="img/ccy_jpy.png" class="categoryIcon"></div>
         <div class="rawdata" id="rawdata_currency"></div>
         <div class="textResult norisk" id="CustomFieldCheck-CurrencyCheck">-</div>
-    
-        
-        <div class="oneResult"><div>Shopper Location</div><img src="img/shooperCountry.png" class="categoryIcon"></div>
-    <div class="rawdata" id="rawdata_shopperCountry"></div>
-    <div class="textResult norisk" id="CustomFieldCheck-ShopperCountryCodeCheck">-</div>
+            
+        <div class="oneResult"><div id="result_shopper_location"></div><img src="img/shooperCountry.png" class="categoryIcon"></div>
+        <div class="rawdata" id="rawdata_shopperCountry"></div>
+        <div class="textResult norisk" id="CustomFieldCheck-ShopperCountryCodeCheck">-</div>
 
-    <div class="oneResult"><div>Delivery Location</div><img src="img/playAgain.png" class="categoryIcon"></div>
-    <div class="rawdata" id="rawdata_deliveryCountry"></div>
-    <div class="textResult norisk" id="CustomFieldCheck-DeliveryCountryCheck">-</div>
+        <div class="oneResult"><div id="result_delivery_location"></div><img src="img/playAgain.png" class="categoryIcon"></div>
+        <div class="rawdata" id="rawdata_deliveryCountry"></div>
+        <div class="textResult norisk" id="CustomFieldCheck-DeliveryCountryCheck">-</div>
 
-    <div class="oneResult"><div>Account Age</div><img src="img/account.png" class="categoryIcon"></div>
-    <div class="rawdata" id="rawdata_accountAge"></div>
-    <div class="textResult norisk" id="CustomFieldCheck-AccountAgeLessThanAWeek">-</div>
-    
-    
+        <div class="oneResult"><div id="result_account_age"></div><img src="img/account.png" class="categoryIcon"></div>
+        <div class="rawdata" id="rawdata_accountAge"></div>
+        <div class="textResult norisk" id="CustomFieldCheck-AccountAgeLessThanAWeek">-</div>
     </div>
-</div>
-
-<!--
-<div class="result" id='resultDiv'>
-    <div class="colspan resultTitle">Risk Game Results</div>
-    
-    <div class="oneResult"><img src="img/amount.png" width="40"><div>Amount</div></div>
-    <div class="rawdata" id="rawdata_amount"></div>
-    <div class="textResult norisk" id="CustomFieldCheck-AmountCheck">-</div>
-    <div class="resultscore">
-        Risk score
-    </div>
-
-    <div class="oneResult"><img src="img/ccy_jpy.png" class="categoryIcon"><div>Currency</div></div>
-    <div class="rawdata" id="rawdata_currency"></div>
-    <div class="textResult norisk" id="CustomFieldCheck-CurrencyCheck">-</div>
-    <div class="resultscore2">
-        <div><img src="img/risk.png" width="80"><div></div></div>
-        <div class="finalrisk" id="finalrisk"></div>
-    </div>
-
-    <div class="oneResult"><img src="img/shooperCountry.png" class="categoryIcon"><div>Shopper Country</div></div>
-    <div class="rawdata" id="rawdata_shopperCountry"></div>
-    <div class="textResult norisk" id="CustomFieldCheck-ShopperCountryCodeCheck">-</div>
-
-    <div class="oneResult"><img src="img/playAgain.png" class="categoryIcon"><div>Delivery Country</div></div>
-    <div class="rawdata" id="rawdata_deliveryCountry"></div>
-    <div class="textResult norisk" id="CustomFieldCheck-DeliveryCountryCheck">-</div>
-
-    <div class="oneResult"><img src="img/account.png" class="categoryIcon"><div>Account Age</div></div>
-    <div class="rawdata" id="rawdata_accountAge"></div>
-    <div class="textResult norisk" id="CustomFieldCheck-AccountAgeLessThanAWeek">-</div>
-
-    <div class="approved" id="approvedDeclined">-</div>
 
 </div>
--->
 
 </html>
